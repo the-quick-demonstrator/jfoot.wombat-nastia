@@ -1,5 +1,7 @@
 package com.github.curriculeon.jfoot;
 
+import com.github.git_leon.jfoot.sprite.Sprite;
+import com.github.git_leon.jfoot.sprite.SpriteCreatorRemover;
 import greenfoot.Actor;
 
 /**
@@ -7,16 +9,11 @@ import greenfoot.Actor;
  * @version 2.0
  */
 public abstract class Herbivore extends Actor {
-    protected static final int EAST = 0;
-    protected static final int WEST = 1;
-    protected static final int NORTH = 2;
-    protected static final int SOUTH = 3;
-
-    protected int direction;
     private int leavesEaten;
+    private Direction direction;
 
     public Herbivore() {
-        setDirection(EAST);
+        setDirection(Direction.EAST);
         leavesEaten = 0;
     }
 
@@ -25,22 +22,6 @@ public abstract class Herbivore extends Actor {
      */
     public final void move() {
         move(1);
-    }
-
-    public final Boolean isFacingWest() {
-        return this.direction == WEST;
-    }
-
-    public final Boolean isFacingEast() {
-        return this.direction == EAST;
-    }
-
-    public final Boolean isFacingNorth() {
-        return this.direction == NORTH;
-    }
-
-    public Boolean isFacingSouth() {
-        return this.direction == SOUTH;
     }
 
     /**
@@ -56,22 +37,29 @@ public abstract class Herbivore extends Actor {
      * Eat a leaf (if there is one in our cell).
      */
     public final void eatLeaf() {
-        Actor leaf = getOneObjectAtOffset(0, 0, Leaf.class);
-        if (leaf != null) {
-            // eat the leaf...
-            getWorld().removeObject(leaf);
-            leavesEaten = leavesEaten + 1;
-        }
+        Actor leaf = getOneIntersectingObject(Leaf.class);
+        SpriteCreatorRemover spriteCreatorRemover = new SpriteCreatorRemover(leaf);
+        spriteCreatorRemover.destroy();
+        leavesEaten = leavesEaten + 1;
     }
 
     /**
      * Set the direction we're facing. The 'direction' parameter must
      * be in the range [0..3].
      */
-    public final void setDirection(int direction) {
+    private final void setDirection(int direction) {
         if ((direction >= 0) && (direction <= 3)) {
             setRotation(direction * 90);
         }
+    }
+
+    public final void setDirection(Direction direction) {
+        this.direction = direction;
+        setDirection(direction.ordinal());
+    }
+
+    public Direction getDirection() {
+        return this.direction;
     }
 
     /**

@@ -1,5 +1,9 @@
 package com.github.curriculeon.jfoot;
 
+import com.github.git_leon.RandomUtils;
+
+import static com.github.curriculeon.jfoot.Direction.*;
+
 /**
  * Wombat. A Wombat moves forward until it hits the edge of the world, at
  * which point it turns left. If a wombat finds a leaf, it eats it.
@@ -23,11 +27,11 @@ public class Wombat extends Herbivore {
     }
 
     public void turnLeft() {
-        if (this.direction == EAST) {
+        if (this.getDirection() == EAST) {
             this.setDirection(NORTH);
-        } else if (this.direction == WEST) {
+        } else if (this.getDirection() == WEST) {
             this.setDirection(SOUTH);
-        } else if (this.direction == NORTH) {
+        } else if (this.getDirection() == NORTH) {
             this.setDirection(WEST);
         } else {
             this.setDirection(EAST);
