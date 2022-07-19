@@ -15,7 +15,7 @@
 * This application is built using the [Jfoot](https://github.com/Git-Leon/jfoot-api) library.
 
 
-
+<hr><hr>
 ## How to Download
 
 #### Part 1 - Forking the Project
