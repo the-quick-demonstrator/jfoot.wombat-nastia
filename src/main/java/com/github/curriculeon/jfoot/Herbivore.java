@@ -54,12 +54,23 @@ public abstract class Herbivore extends Actor {
     }
 
     public final void setDirection(Direction direction) {
+        System.out.println("Current Direction = " + getDirection());
         this.direction = direction;
         setDirection(direction.ordinal());
+        System.out.println("New Direction = " + getDirection());
+        System.out.println("=================================");
     }
 
     public Direction getDirection() {
         return this.direction;
+    }
+
+    public Boolean isAtTopEdge() {
+        return getY() == 0;
+    }
+
+    public Boolean isAtBottomEdge() {
+        return getY() == getWorld().getHeight();
     }
 
     /**
