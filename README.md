@@ -1,7 +1,7 @@
 # Wombat World
 ![](./wombats-world.gif)
 
-![](./wombat-world-simulation.gif)
+![](./wombat-solution.gif)
 * **Purpose**
   * To establish familiarity with conditional statements
 * **Objective**
